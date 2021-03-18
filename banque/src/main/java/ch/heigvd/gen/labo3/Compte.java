@@ -1,4 +1,4 @@
-package ch.heigvd.gen;
+package ch.heigvd.gen.labo3;
 
 public class Compte {
     private int numero;

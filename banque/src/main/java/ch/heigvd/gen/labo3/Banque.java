@@ -1,4 +1,4 @@
-package ch.heigvd.gen;
+package ch.heigvd.gen.labo3;
 
 import java.util.ArrayList;
 import java.util.List;
