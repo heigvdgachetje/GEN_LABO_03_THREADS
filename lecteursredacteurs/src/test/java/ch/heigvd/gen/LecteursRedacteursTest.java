@@ -1,4 +1,4 @@
-package ch.heigvd.gen.labo3;
+package ch.heigvd.gen;
 
 import ch.heig.pl.lecteursredacteurs.Controleur;
 import ch.heig.pl.lecteursredacteurs.Lecteur;

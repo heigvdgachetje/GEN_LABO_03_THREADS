@@ -12,6 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="banque" target="8" />
+      <module name="labo3" target="1.8" />
       <module name="lecteursredacteurs" target="8" />
     </bytecodeTargetLevel>
   </component>
