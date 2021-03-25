@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TrasfertsTest {
 
     @Test
-    void LeCompteDesMilleEtUnsThreads() throws InterruptedException {
+    void LeCompteDesMilleEtUnThreads() throws InterruptedException {
         Banque banque = new Banque(10);
         List<Thread> threads = new ArrayList<>();
 

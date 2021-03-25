@@ -24,7 +24,7 @@ public class Transferts implements Runnable {
         Random rng = new Random();
 
         for (int i = 0; i < nbTransferts; i++) {
-            banque.transfert(rng.nextInt(banque.getNbComptes()), rng.nextInt(banque.getNbComptes()), rng.nextInt(10));
+            banque.transfert(rng.nextInt(banque.getNbComptes()), rng.nextInt(banque.getNbComptes()), rng.nextInt(5));
         }
     }
 }
