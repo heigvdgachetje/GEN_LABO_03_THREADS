@@ -2,7 +2,7 @@ package ch.heigvd.gen.labo3;
 
 /* ---------------------------------------------------------------------------------------------
 Lab       : 03
-File      : TrasfertsTest.java
+File      : TransfertsTest.java
 Author(s) : Emmanuelle Comte, Jean Gachet & Fabien Terrani
 Date      : 18.03.2021
 Compiler  : OpenJDK 11
@@ -16,8 +16,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class TrasfertsTest {
-
+public class TransfertsTest
+{
     @Test
     void LeCompteDesMilleEtUnThreads() throws InterruptedException {
         Banque banque = new Banque(10);

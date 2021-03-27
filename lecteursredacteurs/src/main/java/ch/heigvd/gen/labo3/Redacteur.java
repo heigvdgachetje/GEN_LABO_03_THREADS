@@ -10,21 +10,44 @@ Compiler  : OpenJDK 11
 
 public class Redacteur {
     private final Controleur controleur;
-    boolean writing;
+    volatile boolean writing;
+    volatile boolean waiting;
 
-    public Redacteur(Controleur controleur) {
-        this.controleur = controleur;
+    volatile static int ctr = 0;
+    int id = nextId();
+    private synchronized static int nextId() {
+        return ++Redacteur.ctr;
+    }
+
+    public Redacteur(Controleur _controleur) {
+        controleur = _controleur;
+        writing = false;
+        waiting = false;
     }
 
     public void startWrite() {
-        this.controleur.addRedacteur(this);
+        controleur.askToWrite(this);
+        try
+        {
+            Thread.sleep(1000);
+        } catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public boolean isWaiting() {
-        return !writing && controleur.contains(this);
+        return waiting;
     }
 
     public void stopWrite() {
         writing = false;
+        try
+        {
+            Thread.sleep(1000);
+        } catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

@@ -10,22 +10,45 @@ Compiler  : OpenJDK 11
 
 public class Lecteur {
     private final Controleur controleur;
-    boolean reading;
+    volatile boolean reading;
+    volatile boolean waiting;
 
-    public Lecteur(Controleur controleur) {
-        this.controleur = controleur;
-        this.reading = false;
+    volatile static int ctr = 0;
+    int id = nextId();
+    private synchronized static int nextId() {
+        return ++Lecteur.ctr;
+    }
+
+    public Lecteur(Controleur _controleur) {
+        controleur = _controleur;
+        reading = false;
+        waiting = false;
     }
 
     public void startRead() {
-        this.controleur.addLecteur(this);
+        controleur.askToRead(this);
+        try
+        {
+            Thread.sleep(1000);
+        } catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public boolean isWaiting() {
-        return !reading && controleur.contains(this);
+        return waiting;
     }
 
     public void stopRead() {
+        //controleur.stopReading(this);
         reading = false;
+        try
+        {
+            Thread.sleep(1000);
+        } catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
