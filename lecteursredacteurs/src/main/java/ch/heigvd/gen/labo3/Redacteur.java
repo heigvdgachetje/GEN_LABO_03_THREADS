@@ -29,7 +29,7 @@ public class Redacteur {
         controleur.askToWrite(this);
         try
         {
-            Thread.sleep(1000);
+            Thread.sleep(10);
         } catch (InterruptedException e)
         {
             e.printStackTrace();
@@ -41,10 +41,11 @@ public class Redacteur {
     }
 
     public void stopWrite() {
-        writing = false;
+        controleur.stopWriting(this);
+
         try
         {
-            Thread.sleep(1000);
+            Thread.sleep(10);
         } catch (InterruptedException e)
         {
             e.printStackTrace();

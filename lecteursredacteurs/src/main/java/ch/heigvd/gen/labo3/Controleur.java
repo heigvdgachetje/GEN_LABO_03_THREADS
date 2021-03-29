@@ -23,34 +23,35 @@ public class Controleur {
         Thread t = new Thread( () -> {
             synchronized (document)
             {
-                while (!tryReading(l)) {
+                while (!tryReading(l))
+                {
                     try
                     {
-                        System.out.println("lecteur "+l.id + " attend (thread en pause)");
+                        System.out.println("lecteur " + l.id + " attend (thread en pause)");
                         document.wait();
-                        System.out.println("lecteur "+l.id + " reprend (thread relance)");
+                        System.out.println("lecteur " + l.id + " reprend (thread relance)");
                     } catch (InterruptedException e)
                     {
                         e.printStackTrace();
                     }
                 }
+            }
 
-                while (l.reading) {
-                    /*System.out.println("lecteur "+l.id + " partage le doc avec d'autres lecteurs (thread en pause)");
-                    try
-                    {
-                        document.notifyAll();
-                        document.wait();
-                    } catch (InterruptedException e)
-                    {
-                        e.printStackTrace();
-                    }
-                    System.out.println("lecteur "+l.id + " relit le document (thread relance)");*/
+            while (l.reading)
+            {
+                try
+                {
+                    Thread.sleep(5);
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
                 }
+                System.out.println("lecteur "+l.id + " lit...");
+            }
 
+            synchronized (document)
+            {
                 System.out.println("lecteur " + l.id + " a fini de lire");
-                --readingLecteurs;
-                //c.stopReading(l);
                 document.notifyAll();
             }
         });
@@ -64,7 +65,8 @@ public class Controleur {
         Thread t = new Thread( () -> {
             synchronized (document)
             {
-                while (!tryWriting(r)) {
+                while (!tryWriting(r))
+                {
                     try
                     {
                         System.out.println("redacteur "+r.id + " attend (thread en pause)");
@@ -76,10 +78,19 @@ public class Controleur {
                     }
                 }
 
-                while (r.writing);
+                while (r.writing)
+                {
+                    try
+                    {
+                        Thread.sleep(5);
+                    } catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    System.out.println("redacteur "+r.id + " ecrit...");
+                }
 
                 System.out.println("redacteur " + r.id + " a fini d'ecrire");
-                writingRedacteur = false;
                 document.notifyAll();
             }
         });
@@ -131,7 +142,7 @@ public class Controleur {
         stopWaiting(l);
         ++readingLecteurs;
         l.reading = true;
-        System.out.println("lecteur " + l.id + " lit");
+        System.out.println("lecteur " + l.id + " peut commencer a lire");
     }
 
     private synchronized void startWritingDocument(Redacteur r)
@@ -139,7 +150,25 @@ public class Controleur {
         stopWaiting(r);
         writingRedacteur = true;
         r.writing = true;
-        System.out.println("redacteur " + r.id + " ecrit");
+        System.out.println("redacteur " + r.id + " peut commencer a ecrire");
+    }
+
+    public synchronized void stopReading(Lecteur l)
+    {
+        if (l.reading)
+        {
+            l.reading = false;
+            --readingLecteurs;
+        }
+    }
+
+    public synchronized void stopWriting(Redacteur r)
+    {
+        if (r.writing)
+        {
+            r.writing = false;
+            writingRedacteur = false;
+        }
     }
 
     private synchronized boolean tryReading(Lecteur l)

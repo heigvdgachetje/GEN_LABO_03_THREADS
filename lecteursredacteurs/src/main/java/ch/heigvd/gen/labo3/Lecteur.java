@@ -29,7 +29,7 @@ public class Lecteur {
         controleur.askToRead(this);
         try
         {
-            Thread.sleep(1000);
+            Thread.sleep(10);
         } catch (InterruptedException e)
         {
             e.printStackTrace();
@@ -41,11 +41,11 @@ public class Lecteur {
     }
 
     public void stopRead() {
-        //controleur.stopReading(this);
-        reading = false;
+        controleur.stopReading(this);
+
         try
         {
-            Thread.sleep(1000);
+            Thread.sleep(10);
         } catch (InterruptedException e)
         {
             e.printStackTrace();
