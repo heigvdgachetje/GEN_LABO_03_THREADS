@@ -41,6 +41,7 @@ public class Controleur {
             {
                 try
                 {
+                    // temporisation pour éviter un affichage trop conséquent dans la console
                     Thread.sleep(5);
                 } catch (InterruptedException e)
                 {
@@ -82,6 +83,7 @@ public class Controleur {
                 {
                     try
                     {
+                        // temporisation pour éviter un affichage trop conséquent dans la console
                         Thread.sleep(5);
                     } catch (InterruptedException e)
                     {

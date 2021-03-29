@@ -29,7 +29,8 @@ public class Lecteur {
         controleur.askToRead(this);
         try
         {
-            Thread.sleep(10);
+            // délai pour laisser le temps au thread créé par askToRead() de démarrer
+            Thread.sleep(100);
         } catch (InterruptedException e)
         {
             e.printStackTrace();
@@ -45,7 +46,9 @@ public class Lecteur {
 
         try
         {
-            Thread.sleep(10);
+            // délai pour laisser le temps aux autres threads d'être notifiés par
+            // le thread de ce Lecteur
+            Thread.sleep(100);
         } catch (InterruptedException e)
         {
             e.printStackTrace();
