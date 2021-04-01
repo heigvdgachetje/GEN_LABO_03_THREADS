@@ -17,7 +17,7 @@ public class Compte {
         return montant;
     }
 
-    public boolean debit(int valeur) {
+    public synchronized boolean debit(int valeur) {
         if (montant - valeur >= 0) {
             this.montant -= valeur;
             return true;
@@ -26,7 +26,7 @@ public class Compte {
         }
     }
 
-    public void credit(int valeur) {
+    public synchronized void credit(int valeur) {
         this.montant += valeur;
     }
 
